@@ -11,10 +11,10 @@ def root():
 # Fake book data
 books = {
     1: {"title": "The Alchemist", "author": "Paulo Coelho", "genre": "Fiction"},
-    2: {"title": "Python Tricks", "author": "Dan Bader"},
-    3: {"title": "Clean Code", "author": "Robert C. Martin"},
-    4: {"title": "You Don't Know JS", "author": "Kyle Simpson"},
-    5: {"title": "FastAPI", "author": "Ashwin"},
+    2: {"title": "Python Tricks", "author": "Dan Bader", "genre": "Coding"},
+    3: {"title": "Clean Code", "author": "Robert C. Martin", "genre": "Coding"},
+    4: {"title": "You Don't Know JS", "author": "Kyle Simpson", "genre": "Coding"},
+    5: {"title": "FastAPI", "author": "Ashwin", "genre": "DBMS"},
 }
 
 # to get books based on the value
@@ -31,6 +31,14 @@ def get_books(book_id: int):
 @app.get('/books/search')
 def search_books(author: str = None):
     if author:
-        results = [book for book in books.values() if book['author'] == author]
+        results = [book for book in books.values() if book['author'].lower() == author.lower()]
+        return results or {"message": "Book not found"}
+    return books
+
+# search based on the genre
+@app.get('/books/search/genre')
+def search_genre(genre: str=None):
+    if genre:
+        results = [book for book in books.values() if book['genre'].lower() == genre.lower()]
         return results or {"message": "Book not found"}
     return books

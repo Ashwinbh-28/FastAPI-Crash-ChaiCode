@@ -26,3 +26,8 @@ def root():
 def query(name: str):
     return {"message": f"Hello {name}"}
 
+
+# to get items in url or API
+@app.get('/item/{item_id}')
+def get_item(item_id : int):
+    return {"item_id": item_id}

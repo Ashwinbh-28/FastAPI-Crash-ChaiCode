@@ -28,3 +28,11 @@ def register_employee(employee: Employee):
 @app.get("/employees")
 def get_employees():
     return employees
+
+employees = Employee(
+    id=1,
+    name="John Doe",
+    department="IT",
+    salary=50000
+)
+print(employees)
